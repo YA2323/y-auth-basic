@@ -1,14 +1,10 @@
 package com.example.yauthbasic;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
- //String username = ((User) SecurityContextHolder
-  //       .getContext()
-    //     .getAuthentication()
-      //   .getPrincipal())
-      //   .getUsername();
 
 
 @RestController
@@ -18,6 +14,13 @@ public class HelloController {
     @GetMapping("hello")
     String hallo(){
 
-        return "hallo";
+
+        String username = ((User) SecurityContextHolder
+              .getContext()
+             .getAuthentication()
+           .getPrincipal())
+           .getUsername();
+
+        return "Hallo " + username;
     }
 }
