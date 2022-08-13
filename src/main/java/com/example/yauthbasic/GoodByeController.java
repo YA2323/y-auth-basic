@@ -7,19 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+
 @RestController
 @RequestMapping("api")
-public class HelloController {
+public class GoodByeController {
 
-    @GetMapping("hello")
+    @GetMapping("bye")
     String hallo(){
 
         String username = ((User) SecurityContextHolder
-              .getContext()
-             .getAuthentication()
-           .getPrincipal())
-           .getUsername();
+                .getContext()
+                .getAuthentication()
+                .getPrincipal())
+                .getUsername();
 
-        return "Hallo " + username;
+        return "Peace out " + username;
     }
 }

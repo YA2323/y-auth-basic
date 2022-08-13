@@ -16,7 +16,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("Tom")
                 .password(passwordEncoder().encode("123"))
-                .roles("over18");
+                .roles("over18")
+                .and()
+                .withUser("Tina")
+                .password(passwordEncoder().encode("123"))
+                .roles("under18");
     }
 
     @Bean
@@ -27,8 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/users/*").permitAll()
-                .antMatchers("/api/**").hasRole("over18")
+                .antMatchers("/api/bye").hasRole("under18")                   //permitAll()
+                .antMatchers("/api/hello").hasRole("over18")
                 .and().httpBasic();
     }
 }
